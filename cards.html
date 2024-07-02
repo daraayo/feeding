@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="pay.css">
+
+</head>
+<body>
+
+<div class="container">
+
+    <form action="" id="payment-form">
+
+        <div class="row">
+
+            <div class="col">
+
+                <h3 class="title">billing address</h3>
+
+                <div class="inputBox">
+                    <span>full name :</span>
+                    <input type="text" placeholder="john deo" id="fullName">
+                </div>
+                <div class="inputBox">
+                    <span>email :</span>
+                    <input type="email" placeholder="example@example.com" id="email">
+                </div>
+                <div class="inputBox">
+                    <span>address :</span>
+                    <input type="text" placeholder="room - street - locality" id="address">
+                </div>
+                <div class="inputBox">
+                    <span>city :</span>
+                    <input type="text" placeholder="abuja" id="city">
+                </div>
+                <div class="inputBox">
+                        <span>amount :</span>
+                        <input type="number" placeholder="Amount" id="amount">
+                    </div>
+
+                <div class="flex">
+                    <div class="inputBox">
+                        <span>state :</span>
+                        <input type="text" placeholder="Nigeria" id="state">
+                    </div>
+                    <div class="inputBox">
+                        <span>zip code :</span>
+                        <input type="text" placeholder="123 456" id="zipCode">
+                    </div>
+                    
+                </div>
+
+            </div>
+
+            <div class="col">
+
+                <h3 class="title">payment</h3>
+
+                <div class="inputBox">
+                    <span>cards accepted :</span>
+                    <img src="card_img.png" alt="">
+                </div>
+                <div class="inputBox">
+                    <span>name on card :</span>
+                    <input type="text" placeholder="mr. john deo" id="nameOnCard">
+                </div>
+                <div class="inputBox">
+                    <span>credit card number :</span>
+                    <input type="number" placeholder="1111-2222-3333-4444" id="creditCardNumber">
+                </div>
+                <div class="inputBox">
+                    <span>exp month :</span>
+                    <input type="text" placeholder="january" id="expMonth">
+                </div>
+
+                <div class="flex">
+                    <div class="inputBox">
+                        <span>exp year :</span>
+                        <input type="number" placeholder="2022" id="expYear">
+                    </div>
+                    <div class="inputBox">
+                        <span>CVV :</span>
+                        <input type="text" placeholder="1234" id="cvv">
+                    </div>
+                </div>
+
+            </div>
+    
+        </div>
+
+        <input type="submit" value="proceed to checkout" class="submit-btn" id="submit-btn">
+
+    </form>
+
+</div>    
+    <script>
+           const form = document.getElementById('payment-form');
+  const submitButton = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const formData = {
+      fullName: document.getElementById('fullName').value,
+      email: document.getElementById('email').value,
+      address: document.getElementById('address').value,
+      city: document.getElementById('city').value,
+      state: document.getElementById('state').value,
+      zipCode: document.getElementById('zipCode').value,
+      nameOnCard: document.getElementById('nameOnCard').value,
+      creditCardNumber: document.getElementById('creditCardNumber').value,
+      expMonth: document.getElementById('expMonth').value,
+      expYear: document.getElementById('expYear').value,
+      cvv: document.getElementById('cvv').value,
+      amount: document.getElementById('amount').value,
+    };
+
+    localStorage.setItem('formData', JSON.stringify(formData));
+
+    window.location.href = 'pdfFC.html';
+  });
+    </script>
+</body>
+</html>

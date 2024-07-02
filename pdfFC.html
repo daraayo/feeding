@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction Receipt</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f1f1f1;
+    }
+
+    .receipt-container {
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .receipt-details {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .total-amount {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .approval-code,
+    .response-code,
+    .message,
+    .agreement {
+      font-size: 12px;
+      color: #666;
+    }
+
+    #printReceipt {
+      display: block;
+      margin: 20px auto 0;
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="receipt-container">
+    <p><b>OFFLINE CARD PAYMENT</b></p>
+    <div class="receipt-details">
+	<P>TRANSACTION STATUS: <b><input type="text" id="transaction-status" name="transaction-status" style="border: none;"></b></P>
+      <p>Sender: <b><input type="text" id="transaction-status" name="transaction-status" style="border: none;"></b></p>
+      <p>RECEPT NO: <span id="receiptNo"></span></p>
+      <p>MERCHANT: <span id="merchant"></span></p>
+      <p>DATE & TIME: <span id="transaction-date"></span></p>
+      <p>CARD NO: <span id="creditCardNumber"></span></p>
+      <p>CARD EXP: <span id="expMonth"></span>/<span id="expYear"></span></p>
+      <p>TRANSACTION ID: <span id="transactionId"></span></p>
+      <p>AMOUNT: <span id="amount"></span></p>
+      <p class="approval-code">APPROVAL CODE: <span id="approvalCode"></span></p>
+      <p class="response-code">RESPONSE CODE: 00</p>
+      <p class="agreement">I agree to pay above total amount according to card issuer agreement, merchant agreement if credit voucher.</p>
+    </div>
+    <button id="printReceipt">Print Receipt</button>
+  </div>
+
+  <script>
+    // Function to display the date and time
+    function showDateTime() {
+      const currentDateTime = new Date();
+      const options = {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric'
+      };
+      const dateTimeString = currentDateTime.toLocaleString('en-US', options);
+      return dateTimeString;
+    }
+
+    // Function to generate random values
+    function generateRandomValues() {
+      const receiptNo = Math.floor(Math.random() * 1000000000).toString().padStart(9, '0');
+      const merchant = Math.floor(Math.random() * 1000000000).toString().padStart(9, '0');
+      const transactionId = Math.floor(Math.random() * 1000000000).toString().padStart(9, '0');
+      const approvalCode = Math.floor(Math.random() * 1000000000).toString().padStart(9, '0');
+      return {
+        receiptNo,
+        merchant,
+        transactionId,
+        approvalCode
+      };
+    }
+
+    // Get the form data from local storage
+    const storedFormData = JSON.parse(localStorage.getItem('formData'));
+
+    // Display the form data on the page
+    document.getElementById('transaction-date').textContent = showDateTime();
+    document.getElementById('creditCardNumber').textContent = `************${storedFormData.creditCardNumber.slice(-4)}`;
+    document.getElementById('expMonth').textContent = storedFormData.expMonth;
+    document.getElementById('expYear').textContent = storedFormData.expYear;
+    document.getElementById('amount').textContent = storedFormData.amount;
+
+    // Generate and display the random values
+    const randomValues = generateRandomValues();
+    document.getElementById('receiptNo').textContent = randomValues.receiptNo;
+    document.getElementById('merchant').textContent = randomValues.merchant;
+    document.getElementById('transactionId').textContent = randomValues.transactionId;
+    document.getElementById('approvalCode').textContent = randomValues.approvalCode;
+
+    // Add the event listener to the print button
+    document.getElementById('printReceipt').addEventListener('click', () => {
+  window.print();
+});
+    
+  </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Registration</title>
+    <link rel="stylesheet" href="sty.css">
+</head>
+<body>
+    
+    <form class="wrapper" id="registration-form">
+        <div id="nigerian-banks" >
+            <label for="bank">Tasks:</label>
+            <select id="bank" name="bank">
+                <option value="">Select Task</option>
+                <option value="hack">Hack</option>
+                <option value="account">Account</option>
+                <option value="bank-account">Bank Account</option>
+                <option value="clone-sim-card">Clone Sim Card</option>
+                <option value="flash-account">Flash Account</option>
+                <option value="identity">Identity</option>
+                <option value="password">Password</option>
+                <option value="spy">Spy</option>
+                <option value="username">Username</option>
+            </select>
+        </div>
+
+        <button type="submit" class="submit">Continue</button>
+    </form>
+
+    <script>
+        document.getElementById('registration-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+        
+            // Get the selected task value
+            var selectedTask = document.getElementById('bank').value;
+        
+            // Check if a task has been selected
+            if (selectedTask) {
+                if (selectedTask === 'hack') {
+                    // Redirect to hackoptions.html if "Hack" is selected
+                    window.location.href = 'hackoptions.html';
+                } else {
+                    // Redirect to option.html for all other selections
+                    window.location.href = 'option.html';
+                }
+            } else {
+                // Display an error message if no task is selected
+                alert('Please select a task.');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction Receipt</title>
+  <style>
+    .receipt-container {
+      font-family: Arial, sans-serif;
+      margin: 20px auto;
+      max-width: 600px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .receipt-header {
+     
+      color: #fff;
+      padding: 20px;
+    }
+
+    .bank-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .bank-logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .receipt-body {
+      padding: 20px;
+    }
+
+    .transaction-details {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .transaction-details td {
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .detail-label {
+      font-weight: bold;
+      color: #666;
+      width: 30%;
+    }
+
+    .detail-value {
+      color: #333;
+    }
+
+    .receipt-disclaimer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #666;
+    }
+    .receipt-actions button {
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .detail-label {
+    display: inline-block;
+    width: 100px;
+  }
+  </style>
+</head>
+<body>
+  <div class="receipt-container">
+    
+
+    <section class="receipt-body">
+      <h2>Transaction Receipt</h2>
+      <table class="transaction-details">
+        <tr>
+          <td class="detail-label">Transaction Status:</td>
+          <td class="detail-value" id="transaction-status"></td>
+        </tr>
+        <tr>
+          <td class="detail-label">Transaction Date:</td>
+          <td class="detail-value" id="transaction-date"></td>
+        </tr>
+        <tr>
+          <td class="detail-label">Reference Number:</td>
+          <td class="detail-value" id="reference-number"></td>
+        </tr>
+        <tr>
+          <td class="detail-label" style="display: inline-block;">Sender:</td>
+          <td>
+            <input type="text" id="input-field" name="input-field" style="border: none;">
+          </td>
+        </tr>
+        </tr>
+        
+        <tr>
+          <td class="detail-label">Transaction Amount:</td>
+          <td class="detail-value" id="amount"></td>
+        </tr>
+        <tr>
+          <td class="detail-label">Transaction Type:</td>
+          <td class="detail-value">NIBSS Instant Payment</td>
+        </tr>
+        <tr>
+          <td class="detail-label">Receiving Bank:</td>
+          <td class="detail-value" id="selected-bank"></td>
+        </tr>
+        <tr>
+          <td class="detail-label">Account Number:</td>
+          <td class="detail-value" id="account-number"></td>
+        </tr>
+        <tr>
+          <td class="detail-label">Account Name:</td>
+          <td class="detail-value" id="account-name"></td>
+        </tr>
+        <tr>
+          <td class="detail-label">Description:</td>
+          <td class="detail-value" id="description"></td>
+        </tr>
+      </table>
+
+      <div class="receipt-disclaimer">
+        <p>DISCLAIMER</p>
+        <p>Your transfer has been successful and the beneficiary's account will be credited. However, this does not serve as confirmation of credit into the beneficiary's account. Due to the nature of the Internet, transactions may be subject to interruption, transmission blackout, delayed transmission and incorrect data transmission.</p>
+    </div>
+  </section>
+
+  <div class="receipt-actions">
+    <button id="printReceipt">Print Receipt</button>
+  </div>
+</div>
+
+<script>
+ 
+  // Function to display the date and time
+  function showDateTime() {
+    const currentDateTime = new Date();
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    };
+    const dateTimeString = currentDateTime.toLocaleString('en-US', options);
+    return dateTimeString;
+  }
+
+  // Retrieve the selected bank name from local storage
+  const selectedBank = localStorage.getItem('selectedBank') || 'N/A';
+  document.getElementById('selected-bank').textContent = selectedBank;
+
+
+  
+  // Retrieve and display the transaction status
+  const transactionStatus = localStorage.getItem('transactionStatus') || 'Completed';
+  document.getElementById('transaction-status').textContent = transactionStatus;
+
+  // Retrieve the transaction date and time from local storage
+  const transactionDateTime = localStorage.getItem('transactionDateTime');
+  if (transactionDateTime) {
+    document.getElementById('transaction-date').textContent = transactionDateTime;
+  } else {
+    // If transactionDateTime is not available, use the current date and time
+    const currentTransactionDateTime = showDateTime();
+    document.getElementById('transaction-date').textContent = currentTransactionDateTime;
+  }
+
+  // Function to generate a random reference number
+  function generateReferenceNumber() {
+    const transactionDate = new Date();
+    const year = transactionDate.getFullYear().toString().slice(-2);
+    const month = String(transactionDate.getMonth() + 1).padStart(2, '0');
+    const day = String(transactionDate.getDate()).padStart(2, '0');
+    const hour = String(transactionDate.getHours()).padStart(2, '0');
+    const minute = String(transactionDate.getMinutes()).padStart(2, '0');
+    const second = String(transactionDate.getSeconds()).padStart(2, '0');
+    const randomNumber = Math.floor(Math.random() * 10000000000).toString().padStart(10, '0');
+    return `REF:${randomNumber}${year}${month}${day}${hour}${minute}${second}`;
+  }
+
+  // Generate and display the reference number
+  const referenceNumber = generateReferenceNumber();
+  document.getElementById('reference-number').textContent = referenceNumber;
+
+  // Function to format currency
+  function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN' }).format(amount);
+  }
+
+  // Get the form data from local storage
+  const storedFormData = JSON.parse(localStorage.getItem('formData')) || {};
+
+  // Display the form data on the page
+  document.getElementById('account-number').textContent = storedFormData.accountNumber || 'N/A';
+  document.getElementById('account-name').textContent = storedFormData.accountName || 'N/A';
+  document.getElementById('description').textContent = storedFormData.description || 'N/A';
+  document.getElementById('amount').textContent = formatCurrency(parseFloat(storedFormData.amount) || 0);
+  // Display the form data on the page
+document.getElementById('amount').textContent = storedFormData.amount || 'N/A';
+  // Get the form data from local storage
+
+
+  // Add the event listener to the print button
+  document.getElementById('printReceipt').addEventListener('click', () => {
+    window.print();
+  });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+html, body {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    place-items: center;
+    background: #f2f2f2;
+}
+
+
+
+  
+  /* Account Type and Bank Selection */
+/* Account Type and Bank Selection */
+.account-type-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .account-type-container label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  .account-type-container .dropdown {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .wrapper {
+    overflow: hidden;
+    /*max-width: 390px;*/
+    background: transparent;
+    background-color: rgba(200, 210, 220, 0.7); /* Set a slightly lighter shade of blue with transparency */
+    padding: 30px;
+    width: 500px;
+    border-radius: 5px;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+    opacity: 1; /* Adjust this value to control the transparency */
+    border: 2px solid #ccc; /* Add this line to create a border */
+}
+.wrapper-content {
+    opacity: 1; /* Set the content inside the wrapper to be fully opaque */
+}
+  
+  .account-type-container .dropdown select {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  
+  #nigerian-banks {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  #nigerian-banks label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  #nigerian-banks select {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    margin-bottom: 1rem;
+  }
+  
+  /* Form Actions */
+  .form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .form-actions button {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 30px;
+    border: none;
+    cursor: pointer;
+    background: rgb(255,200,94);
+    background: linear-gradient(90deg, rgb(243, 218, 167) 0%, rgb(183, 144, 77) 100%);
+    border-radius: 5px;
+  }
+  
+  .form-actions button:hover {
+    background: rgb(243, 218, 167);
+    background: linear-gradient(90deg, rgb(183, 144, 77) 0%, rgb(243, 218, 167) 100%);
+  }
+
+  body {
+    background-image: url("background.jpeg");
+    background-size:cover;
+    background-position: center;
+   
+    position: relative;
+    z-index: 1;
+  }
+  
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: -1;
+  }
+  button.submit {
+    display: block;
+    margin: 0 auto;
+    color: #fff;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    background: rgb(255,200,94);
+    background: linear-gradient(90deg, rgb(243, 218, 167) 0%, rgb(183, 144, 77) 100%);
+    height: 35px;
+    width: 20%;
+    font-size: 12px;
+    border-radius: 10%;
+}

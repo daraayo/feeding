@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Options</title>
+    <style>
+        /* Apply the same styles as the homepage */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        html, body {
+            display: grid;
+            height: 100%;
+            width: 100%;
+            place-items: center;
+            background: #f2f2f2;
+            background: white;
+        }
+
+        body {
+            background-image: url("background.jpeg");
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.25);
+            z-index: -1;
+        }
+
+        .wrapper {
+            overflow: hidden;
+            background: transparent;
+            background-color: rgba(200, 210, 220, 0.7);
+            padding: 30px;
+            width: 500px;
+            border-radius: 5px;
+            box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+            opacity: 1;
+            border: 2px solid #ccc;
+        }
+
+        .wrapper-content {
+            opacity: 1;
+        }
+
+        .wrapper .title-text {
+            display: flex;
+            width: 200%;
+        }
+
+        .wrapper .title-text .title {
+            width: 50%;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            color: black;
+        }
+
+        /* Add your payment options styles here */
+        .payment-options {
+            margin-top: 30px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .payment-option img {
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+        }
+
+        .payment-option h3 {
+            font-size: 18px;
+            font-weight: 500;
+            color: black;
+        }
+
+        .payment-option p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .payment-option button {
+            margin-left: auto;
+            padding: 10px 20px;
+            background: rgb(255,200,94);
+            background: linear-gradient(90deg, rgb(243, 218, 167) 0%, rgb(183, 144, 77) 100%);
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="wrapper-content">
+            <div class="title-text">
+                <div class="title">Payment Options</div>
+            </div>
+            <div class="payment-options">
+                <div class="payment-option">
+                    <img src="insert-card.png" alt="Credit Card">
+                    <div>
+                        <h3>Credit/Debit Card</h3>
+                        <p>Pay securely with your credit or debit card.</p>
+                    </div>
+                    <button onclick="window.location.href='cards.html'">Pay with Credit Card</button>
+                </div>
+                
+                <div class="payment-option">
+                    <img src="bank transfer.png" alt="Bank Transfer">
+                    <div>
+                        <h3>Bank Transfer</h3>
+                        <p>Pay directly from your bank account.</p>
+                    </div>
+                    <button onclick="window.location.href='bank.html'">Pay with Bank Transfer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

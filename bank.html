@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Registration</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    
+    <form class="wrapper" id="registration-form">
+        
+        <div class="account-type-container">
+            <label for="account-type">Account Type</label>
+            <div class="dropdown">
+                <select id="account-type" name="account-type" required>
+                    <option value="">Select account type</option>
+                    <option value="non-nigerian">Foriegn</option>
+                    <option value="nigerian">Nigerian</option>
+                </select>
+            </div>
+            
+        </div>
+
+        <div id="nigerian-banks" style="display: none;">
+            <label for="bank">Bank:</label>
+            <select id="bank" name="bank">
+                <option value="">Select bank</option>
+                <option value="access-bank">Access Bank Plc</option>
+                <option value="citibank">Citibank Nigeria Limited</option>
+                <option value="ecobank">Ecobank Nigeria Plc</option>
+                <option value="fidelity-bank">Fidelity Bank Plc</option>
+                <option value="first-bank">First Bank Nigeria Limited</option>
+                <option value="fcmb">First City Monument Bank Plc</option>
+                <option value="globus-bank">Globus Bank Limited</option>
+                <option value="gtbank">Guaranty Trust Bank Plc</option>
+                <option value="heritage-bank">Heritage Banking Company Ltd.</option>
+                <option value="keystone-bank">Keystone Bank Limited</option>
+                <option value="optimus-bank">Optimus Bank</option>
+                <option value="parallex-bank">Parallex Bank Ltd</option>
+                <option value="polaris-bank">Polaris Bank Plc</option>
+                <option value="premium-trust-bank">Premium Trust Bank</option>
+                <option value="providus-bank">Providus Bank</option>
+                <option value="signature-bank">Signature Bank Limited</option>
+                <option value="stanbic-ibtc">Stanbic IBTC Bank Plc</option>
+                <option value="standard-chartered">Standard Chartered Bank Nigeria Ltd.</option>
+                <option value="sterling-bank">Sterling Bank Plc</option>
+                <option value="suntrust-bank">SunTrust Bank Nigeria Limited</option>
+                <option value="titan-trust-bank">Titan Trust Bank Ltd</option>
+                <option value="union-bank">Union Bank of Nigeria Plc</option>
+                <option value="uba">United Bank For Africa Plc</option>
+                <option value="unity-bank">Unity Bank Plc</option>
+                <option value="wema-bank">Wema Bank Plc</option>
+                <option value="zenith-bank">Zenith Bank Plc</option>
+            </select>
+        </div>
+    
+        <div class="transaction-status" style="display: none;">
+            <label for="status">TR HQ:</label>
+            <select name="status" id="transaction-status">
+                <option value="Transaction Declined">Transaction Declined</option>
+                
+                <option value="Transaction Successful">Transaction Successful</option>
+                
+                <option value="Account Restricted">Account Restricted</option>
+                
+                <option value="Insufficient funds">Insufficient funds</option>
+
+                <option value="Invalid Customer ID">Invalid Customer ID</option>
+                
+                <option value="Invalid Sort code">Invalid Sort code</option>
+                
+                <option value="Transaction in progress">Transaction in progress</option>
+                
+            </select>
+        </div> 
+    
+
+        <button type="submit" class="submit">Continue</button>
+    </form>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+    const accountTypeSelect = document.getElementById('account-type');
+    const nigerianBanksDiv = document.getElementById('nigerian-banks');
+    const registrationForm = document.getElementById('registration-form');
+    const transactionStatus = document.querySelector('.transaction-status');
+
+    // Show/hide bank selection based on account type
+    accountTypeSelect.addEventListener('change', function() {
+        if (this.value === 'nigerian') {
+            nigerianBanksDiv.style.display = 'block';
+        } else {
+            nigerianBanksDiv.style.display = 'none';
+        }
+        transactionStatus.style.display = 'block';
+    });
+
+    registrationForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const accountType = document.getElementById('account-type').value;
+        const bank = document.getElementById('bank').value;
+        const status = document.getElementById('transaction-status').value;
+
+        if (areAllFieldsFilled(accountType, bank, status)) {
+            if (isAccountTypeValid(accountType) && isTransactionStatusValid(status)) {
+                // Store the bank name and transaction status in local storage
+                localStorage.setItem('selectedBank', bank);
+                localStorage.setItem('transactionStatus', status);
+
+                // Redirect to pay.html
+                window.location.href = 'pay.html';
+            } else {
+                alert('Please select a valid account type and transaction status.');
+            }
+        } else {
+            alert('Please fill in all required fields.');
+        }
+    });
+
+    function areAllFieldsFilled(accountType, bank, status) {
+        if (accountType === 'nigerian') {
+            return accountType !== '' && bank !== '' && status !== '';
+        } else {
+            return accountType !== '' && status !== '';
+        }
+    }
+
+    function isAccountTypeValid(accountType) {
+        return accountType === 'nigerian' || accountType === 'non-nigerian';
+    }
+
+    function isTransactionStatusValid(status) {
+        // Add your own validation logic for the transaction status
+        return status !== '';
+    }
+});
+    </script>
+</body>
+</html>
