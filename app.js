@@ -5,7 +5,7 @@ const signupBtn = document.querySelector("label.signup");
 const signupLink = document.querySelector(".signup-link a");
 const loginTextElement = document.querySelector(".title-text .login");
 const signupTextElement = document.querySelector(".title-text .signup");
-
+// Sliders for login and sign up and links 
 signupBtn.onclick = function() {
     loginForm.style.marginLeft = "-50%";
     signupForm.style.display = "block";
@@ -38,7 +38,7 @@ signupFormElement.addEventListener("submit", function(event) {
 
     if (userExists) {
         alert("Username has already been used. Please choose a different username.");
-        return;
+         window.location.href = "index.html";
     }
 
     if (password === confirmPassword) {
